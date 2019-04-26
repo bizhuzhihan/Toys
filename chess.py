@@ -23,9 +23,9 @@ class L(Chess):
             self.filling(k-1, x + ((-1)**(1-xdir))*(2**(k-2)), y - ((-1)**(1-ydir))*(2**(k-2)) + (-1)**(ydir), xdir, 1-ydir)
             self.filling(k-1, x + ((-1)**(1-xdir))*(2**(k-2)), y + ((-1)**(1-ydir))*(2**(k-2)), xdir, ydir)
             k -= 1
-        self.board[x][y] = self.count + self.k*(10**(self.k))
-        self.board[x + (-1)**xdir][y] = self.count + self.k*(10**(self.k))
-        self.board[x][y + (-1)**ydir] = self.count + self.k*(10**(self.k))
+        self.board[x][y] = self.count + self.k*(10**(self.k-1))
+        self.board[x + (-1)**xdir][y] = self.count + self.k*(10**(self.k-1))
+        self.board[x][y + (-1)**ydir] = self.count + self.k*(10**(self.k-1))
         self.count += 1
 
 class P(Chess):
