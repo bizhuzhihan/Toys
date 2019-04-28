@@ -54,14 +54,14 @@ class P(Chess):
 
 
 
-print('请输入k：')
+print('请输入棋盘k（生成2^k * 2^k的矩阵）：')
 k = input()
 b=P(int(k))
 
-print("请输入x：")
+print("请输入x（黑色块的x坐标， 0 ～ 2^-1）：")
 x = input()
 
-print("请输入y：")
+print("请输入y（黑色块的y坐标， 0 ～ 2^-1）：")
 y = input()
 
 b.setting(int(x), int(y))
