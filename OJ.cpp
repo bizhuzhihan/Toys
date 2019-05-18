@@ -1,7 +1,7 @@
 //// Zhihan ZHU
 //// 201630845294
 
-//// 2A
+//// 2A (AC)
 //#include <iostream>
 //#include <stdio.h>
 //using namespace std;
@@ -56,7 +56,7 @@
 //    return 0;
 //}
 
-//// 2B
+//// 2B (AC)
 //#include <iostream>
 //#include <stdio.h>
 //using namespace std;
@@ -97,7 +97,7 @@
 //    return 0;
 //}
 
-//// 2C
+//// 2C (AC)
 //#include <iostream>
 //#include <stdio.h>
 //using namespace std;
@@ -158,39 +158,90 @@
 //    return 0;
 //}
 
-//// 3A
+//// 3A (AC)
 //#include <iostream>
 //#include <stdio.h>
 //using namespace std;
 //
-//int LCS(int m,int n,char x[],char y[])
+//int LCSr(int n,char x[])
 //{
+//    char y[n];
+//    for (int ii=0; ii<n; ii++) {
+//        y[ii] = x[n-1-ii];
+//    }
 //    int i,j;
-//    int c[m+1][n+1];
-////    int b[m+1][n+1];
-//    for (i=0; i<m+1; i++) {
+//    int c[n+1][n+1];
+//    int b[n+1][n+1];
+//    for (i=0; i<n+1; i++) {
 //        c[i][0] = 0;
 //    }
 //    for (j=0; j<n+1;j++) {
 //        c[0][j] = 0;
 //    }
-//    for (i=1; i<m+1; i++) {
+//    for (i=1; i<n+1; i++) {
 //        for (j=1; j<n+1; j++) {
 //            if (x[i-1]==y[j-1]) {
-//                c[i][j] = c[i-1][j-1]+1;
-////                b[i][j] = 1;
+//                c[i][j] = c[i-1][j-1] + 1;
+//                b[i][j] = 1;
 //            }
 //            else if (c[i-1][j]>=c[i][j-1]) {
 //                c[i][j] = c[i-1][j];
-////                b[i][j] = 2;
+//                b[i][j] = 2;
 //            }
 //            else {
 //                c[i][j] = c[i][j-1];
-////                b[i][j] = 3;
+//                b[i][j] = 3;
 //            }
 //        }
 //    }
-//    return c[m][n];
+//    int X[n];
+//    int Y[n];
+//    for (int i=0; i<n; i++) {
+//        X[i] = 0;
+//        Y[i] = 0;
+//    }
+//    i = n;
+//    j = n;
+//    int counter = 0;
+//    while (i>0&&j>0) {
+//        if (b[i][j]==1) {
+//            counter++;
+//            X[--i] = counter;
+//            Y[--j] = counter;
+//        }else if (b[i][j]==2) {
+//            i--;
+//        }else {
+//            j--;
+//        }
+//    }
+//    int ans=0, ans2=0;
+//    int p1=0, p2=0, p3=0;
+//    int pos[2]={n, n+1};
+//    for (; p1<n; p1++) {
+//        if (X[p1]>0) {
+//            for (; p2<=n-1-p1; p2++) {
+//                if (Y[p2]>0) {
+//                    ans++;
+//                    p2++;
+//                    break;
+//                }
+//            }
+//            for (; p3<n-1-p1; p3++) {
+//                if (Y[p3]>0) {
+//                    ans2++;
+//                    p3++;
+//                    break;
+//                }
+//            }
+//        }
+//    }
+//    int Ans;
+//    if ((n-2*ans2)<(n+1-2*ans)) {
+//        Ans = n - 2*ans2;
+//    }else {
+//        Ans = n + 1 - 2*ans;
+//    }
+//    return Ans;
 //}
 //
 //int main() {
@@ -200,85 +251,47 @@
 //            break;
 //        }
 //        char x[n];
-//        int max1 = 0;
-//        int max2 = 0;
 //        for (int i=0; i<n; i++) {
 //            cin >> x[i];
 //        }
-//        for (int i=0; i<n; i++) {
-//            char leftR[i+1];
-//            char right[n-i];
-//            char right2[n-i-1];
-////            cout<<"i="<<i<<'\t';
-////            cout<<"left="<<i+1<<'\t';
-////            cout<<"right="<<n-i<<'\n';
-//            for (int j=0; j<(i+1); j++) {
-//                leftR[j] = x[i-j];
-//            }
-////            cout<<leftR<<'\t';
-//            for (int j=0; j<(n-i); j++) {
-//                right[j] = x[i+j];
-//            }
-////            cout<<right<<'\t';
-//            for (int j=0; j<(n-i-1); j++) {
-//                right2[j] = x[i+j+1];
-//            }
-////            cout<<right2<<'\n';
-////            cout<<LCS(i+1,n-i,leftR,right)<<'\n';
-//            int t = LCS(i+1,n-i,leftR,right);
-//            if (max1 < t) {
-////                max = (n+(n%2))-2*LCS(i+1,n-i,leftR,right);
-//                max1 = t;
-//            }
-//            int t2 = LCS(i+1,n-i-1,leftR,right2);
-//            if (max2 < t2) {
-//                max2 = t2;
-//            }
-//        }
-//        int lcs1 = n+1 - 2*max1;
-//        int lcs2 = n - 2*max2;
-//        if (lcs1<lcs2) {
-//            cout << lcs1 << '\n';
-//        }else{
-//            cout << lcs2 << '\n';
-//        }
+//        cout<<LCSr(n, x)<<'\n';
 //    }
 //    return 0;
 //}
 
-//// 3B
+//// 3B (AC)
 //#include <iostream>
 //#include <stdio.h>
 //using namespace std;
 //
-//int *stones(int p[], int n) {
-//    int sum[n][n], max[n][n], min[n][n];
-//    for (int i=0; i<n; i++) {
+//void stones(long long int p[], long long int n, long long int *ans) {
+//    long long int sum[n][n], max[n][n], min[n][n];
+//    for (long long int i=0; i<n; i++) {
 //        sum[i][i] = p[i];
 //        max[i][i] = 0;
 //        min[i][i] = 0;
 //    }
-//    for (int l=2; l<=n; l++) {
-//        for (int i=0; i<n; i++) {
-//            int j = (i+l-1) % n;
-//            sum[i][j] = sum[(i+1)%n][j] + p[i];
-//            max[i][j] = max[(i+1)%n][j] + sum[i][j];
-//            min[i][j] = min[(i+1)%n][j] + sum[i][j];
-//            for (int k=(i+1)%n; k<j; k++) {
-//                int M = max[i][k] + max[(k+1)%n][j] + sum[i][j];
-//                int m = min[i][k] + min[(k+1)%n][j] + sum[i][j];
-//                if (M>max[i][j]) {
-//                    max[i][j] = M;
+//    for (long long int l=2; l<=n; l++) {
+//        for (long long int i=0; i<n; i++) {
+//            long long int j = (i+l-1) ;
+//            sum[i][j%n] = sum[(i+1)%n][j%n] + p[i];
+//            max[i][j%n] = max[(i+1)%n][j%n] + sum[i][j%n];
+//            min[i][j%n] = min[(i+1)%n][j%n] + sum[i][j%n];
+//            for (long long int k=(i+1); k<j; k++) {
+//                long long int M = max[i][k%n] + max[(k+1)%n][j%n] + sum[i][j%n];
+//                long long int m = min[i][k%n] + min[(k+1)%n][j%n] + sum[i][j%n];
+//                if (M>max[i][j%n]) {
+//                    max[i][j%n] = M;
 //                }
-//                if (m<min[i][j]) {
-//                    min[i][j] = m;
+//                if (m<min[i][j%n]) {
+//                    min[i][j%n] = m;
 //                }
 //            }
 //        }
 //    }
-//    int Min = min[0][n-1];
-//    int Max = max[0][n-1];
-//    for (int i=1; i<n; i++) {
+//    long long int Min = min[0][n-1];
+//    long long int Max = max[0][n-1];
+//    for (long long int i=1; i<n; i++) {
 //        if (Max<max[i][(i+n-1)%n]) {
 //            Max = max[i][(i+n-1)%n];
 //        }
@@ -286,26 +299,31 @@
 //            Min = min[i][(i+n-1)%n];
 //        }
 //    }
-//    int answer[2] = {Min, Max};
-//    return answer;
+//    ans[0] = Min;
+//    ans[1] = Max;
 //}
 //
 //int main() {
-//    int n;
+//    long long int n;
 //    while (cin>>n) {
 //        if (n==0) {
 //            break;
 //        }
-//        int p[n];
-//        for (int i=0; i<n; i++) {
+//        long long int p[n];
+//        for (long long int i=0; i<n; i++) {
 //            cin>>p[i];
 //        }
-//        cout<<*stones(p, n)<<' '<<*(stones(p, n)+1)<<'\n';
+//        long long int ans[2]={0,0};
+//        stones(p, n, ans);
+//        if (n==1) {
+//            cout<<p[0]<<' '<<p[1]<<'\n';
+//        }
+//        cout<<ans[0]<<' '<<ans[1]<<'\n';
 //    }
 //    return 0;
 //}
 
-//// 3C
+//// 3C (AC)
 //#include <iostream>
 //#include <stdio.h>
 //using namespace std;
@@ -379,10 +397,66 @@
 //                }
 //                i++;
 //            }
+//            a[j] = a[i];
 //            cout << LCS(n, j+1, a0, a) <<'\n';
 //        }else {
 //            break;
 //        }
 //    }
+//    return 0;
+//}
+
+//// 3extra
+//#include <iostream>
+//#include <stdio.h>
+//using namespace std;
+//
+//void LCS(int m,int n,char x[],char y[])
+//{
+//    int i,j;
+//    int c[m+1][n+1];
+//    int b[m+1][n+1];
+//    for (i=0; i<m+1; i++) {
+//        c[i][0] = 0;
+//    }
+//    for (j=0; j<n+1;j++) {
+//        c[0][j] = 0;
+//    }
+//    for (i=1; i<m+1; i++) {
+//        for (j=1; j<n+1; j++) {
+//            if (x[i-1]==y[j-1]) {
+//                c[i][j] = c[i-1][j-1]+1;
+//                b[i][j] = 1;
+//            }
+//            else if (c[i-1][j]>=c[i][j-1]) {
+//                c[i][j] = c[i-1][j];
+//                b[i][j] = 2;
+//            }
+//            else {
+//                c[i][j] = c[i][j-1];
+//                b[i][j] = 3;
+//            }
+//        }
+//    }
+//
+//    int x_pos = m;
+//    int y_pos = n;
+//    while ((x_pos>=0) & (y_pos>=0)) {
+//        if (b[x_pos][y_pos]==1) {
+//            cout<<x[x_pos-1];
+//            x_pos -= 1;
+//            y_pos -= 1;
+//        }else if (b[x_pos][y_pos]==2) {
+//            x_pos -= 1;
+//        }else if (b[x_pos][y_pos]==3) {
+//            y_pos -= 1;
+//        }
+//    }
+//}
+//
+//int main() {
+//    char a[] = "adfghj";
+//    char b[] = "asdfuhjk";
+//    LCS(strlen(a), strlen(b), a, b);
 //    return 0;
 //}
