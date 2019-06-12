@@ -460,3 +460,198 @@
 //    LCS(strlen(a), strlen(b), a, b);
 //    return 0;
 //}
+
+
+//// 4A (AC)
+//#include <iostream>
+//#include <stdio.h>
+//using namespace std;
+//
+//int main() {
+//    int n,m;
+//    while (cin>>n>>m) {
+//        if (n==0&&m==0) {
+//            break;
+//        }
+//        int month[12];
+//        for (int i=0; i<12; i++) {
+//            month[i] = 0;
+//        }
+//        int max = 0;
+//        for (int i=4; i>0; i--) {
+//            if ((i*n-(5-i)*m)<0) {
+//                max = i;
+//                break;
+//            }
+//        }
+////        cout<<'m'<<max<<'\n';
+//        int j = 0;
+//        for (; j<max; j++) {
+//            month[j] = 1;
+//        }
+//        for (; j<5; j++) {
+//            month[j] = 0;
+//        }
+//        for (; j<12; j++) {
+//            int sum = n;
+//            for (int k=j-1; k>=j-4; k--) {
+//                if (month[k]==0) {
+//                    sum -= m;
+//                }else {
+//                    sum += n;
+//                }
+//            }
+//            if (sum<0) {
+//                month[j] = 1;
+//            }else {
+//                month[j] = 0;
+//            }
+//        }
+//        int profit = 0;
+//        for (int i=0; i<12; i++) {
+//            if (month[i]==0) {
+//                profit -= m;
+//            }else{
+//                profit += n;
+//            }
+//        }
+//        if (profit>0) {
+//            cout << profit << '\n';
+//        }else{
+//            cout << "NO" << '\n';
+//        }
+//    }
+//    return 0;
+//}
+
+//// 4B (AC)
+//#include <iostream>
+//#include <stdio.h>
+//using namespace std;
+//
+//int pfun(int Y[], int p, int r){
+//    int i=p,j=1+r;
+//    int x=Y[p];
+//    while (true) {
+//        while (Y[++i]<x&&i<r);
+//        while (Y[--j]>x);
+//        if (i>=j) {
+//            break;
+//        }
+//        swap(Y[i], Y[j]);
+//    }
+//    Y[p]=Y[j];
+//    Y[j]=x;
+//    return j;
+//}
+//
+//void qsorting(int Y[], int p, int r){
+//    if (p<r) {
+//        int q=pfun(Y,p,r);
+//        qsorting(Y, q+1, r);
+//        qsorting(Y, p, q-1);
+//    }
+//}
+//
+//int main() {
+//    int m,n;
+//    while (cin>>m>>n) {
+//        if (n==0&&m==0) {
+//            break;
+//        }
+//        int u[n];
+//        for (int i=0; i<n; i++) {
+//            u[i] = 0;
+//        }
+//        for (int i=0; i<n; i++) {
+//            cin >> u[i];
+//        }
+//        qsorting(u, 0, n-1);
+//        int gap[n];
+//        for (int i=0; i<n; i++) {
+//            gap[i] = 0;
+//        }
+//        gap[n-1] = n*m - u[n-1];
+//        for (int i=n-2; i>=0; i--) {
+//            if (gap[i+1]==0) {
+//                gap[i] = u[i+1] - u[i] + gap[i+1] - 1;
+//            }else{
+//                gap[i] = u[i+1] - u[i] + gap[i+1] - 2;
+//            }
+//        }
+////        for (int i=0; i<n; i++) {
+////            cout<<u[i]<<' ';
+////        }
+////        cout<<'\n';
+////        for (int i=0; i<n; i++) {
+////            cout<<gap[i]<<' ';
+////        }
+////        cout<<'\n';
+//        int time = 0;
+//        for (int i=0; i<n; i++) {
+//            time += 1*(gap[i]==0);
+//        }
+//        cout << time << '\n';
+//    }
+//    return 0;
+//}
+
+//// 4C (AC)
+//#include <iostream>
+//#include <stdio.h>
+//using namespace std;
+//
+//int pfun(int Y[], int p, int r){
+//    int i=p,j=1+r;
+//    int x=Y[p];
+//    while (true) {
+//        while (Y[++i]<x&&i<r);
+//        while (Y[--j]>x);
+//        if (i>=j) {
+//            break;
+//        }
+//        swap(Y[i], Y[j]);
+//    }
+//    Y[p]=Y[j];
+//    Y[j]=x;
+//    return j;
+//}
+//
+//void qsorting(int Y[], int p, int r){
+//    if (p<r) {
+//        int q=pfun(Y,p,r);
+//        qsorting(Y, q+1, r);
+//        qsorting(Y, p, q-1);
+//    }
+//}
+//
+//int main() {
+//    int n;
+//    while (cin>>n) {
+//        if (n==0) {
+//            break;
+//        }
+//        int m[n],M[n];
+//        for (int i=0; i<n; i++) {
+//            int v;
+//            cin >> v;
+//            m[i] = v;
+//            M[i] = v;
+//        }
+//        qsorting(m, 0, n-1);
+//        int min = 0;
+//        for (int i=1; i<n; i++) {
+//            m[i] += m[i-1];
+//            min += m[i] - 1;
+//            qsorting(m, i, n-1);
+//        }
+//        qsorting(M, 0, n-1);
+//        int max = 0;
+//        for (int i=n-2; i>=0; i--) {
+//            M[i] += M[i+1];
+//            max += M[i] - 1;
+//        }
+//        cout<<max<<' '<<min<<'\n';
+//    }
+//    return 0;
+//}
