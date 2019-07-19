@@ -1,7 +1,7 @@
 // Zhihan ZHU
 // 201630845294
 
-// 2A (AC)
+// 2A (AC) 斐波那契数列(第二章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -56,7 +56,7 @@ int main() {
     return 0;
 }
 
-// 2B (AC)
+// 2B (AC) a的b次方模c (第二章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -97,7 +97,7 @@ int main() {
     return 0;
 }
 
-// 2C (AC)
+// 2C (AC) 输油管道问题(第二章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -158,7 +158,7 @@ int main() {
     return 0;
 }
 
-// 3A (AC)
+// 3A (AC) 回文(第三章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -259,7 +259,7 @@ int main() {
     return 0;
 }
 
-// 3B (AC)
+// 3B (AC) 石子合并问题(第三章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -323,7 +323,7 @@ int main() {
     return 0;
 }
 
-// 3C (AC)
+// 3C (AC) 最长有序子序列(第三章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -406,62 +406,7 @@ int main() {
     return 0;
 }
 
-// 3extra
-#include <iostream>
-#include <stdio.h>
-using namespace std;
-
-void LCS(int m,int n,char x[],char y[])
-{
-    int i,j;
-    int c[m+1][n+1];
-    int b[m+1][n+1];
-    for (i=0; i<m+1; i++) {
-        c[i][0] = 0;
-    }
-    for (j=0; j<n+1;j++) {
-        c[0][j] = 0;
-    }
-    for (i=1; i<m+1; i++) {
-        for (j=1; j<n+1; j++) {
-            if (x[i-1]==y[j-1]) {
-                c[i][j] = c[i-1][j-1]+1;
-                b[i][j] = 1;
-            }
-            else if (c[i-1][j]>=c[i][j-1]) {
-                c[i][j] = c[i-1][j];
-                b[i][j] = 2;
-            }
-            else {
-                c[i][j] = c[i][j-1];
-                b[i][j] = 3;
-            }
-        }
-    }
-
-    int x_pos = m;
-    int y_pos = n;
-    while ((x_pos>=0) & (y_pos>=0)) {
-        if (b[x_pos][y_pos]==1) {
-            cout<<x[x_pos-1];
-            x_pos -= 1;
-            y_pos -= 1;
-        }else if (b[x_pos][y_pos]==2) {
-            x_pos -= 1;
-        }else if (b[x_pos][y_pos]==3) {
-            y_pos -= 1;
-        }
-    }
-}
-
-int main() {
-    char a[] = "adfghj";
-    char b[] = "asdfuhjk";
-    LCS(strlen(a), strlen(b), a, b);
-    return 0;
-}
-
-// 4A (AC)
+// 4A (AC) 财务问题（第四章题目）
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -483,7 +428,6 @@ int main() {
                 break;
             }
         }
-//        cout<<'m'<<max<<'\n';
         int j = 0;
         for (; j<max; j++) {
             month[j] = 1;
@@ -523,7 +467,7 @@ int main() {
     return 0;
 }
 
-// 4B (AC)
+// 4B (AC) 游戏预测（第四章题目）
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -578,14 +522,6 @@ int main() {
                 gap[i] = u[i+1] - u[i] + gap[i+1] - 2;
             }
         }
-//        for (int i=0; i<n; i++) {
-//            cout<<u[i]<<' ';
-//        }
-//        cout<<'\n';
-//        for (int i=0; i<n; i++) {
-//            cout<<gap[i]<<' ';
-//        }
-//        cout<<'\n';
         int time = 0;
         for (int i=0; i<n; i++) {
             time += 1*(gap[i]==0);
@@ -595,7 +531,7 @@ int main() {
     return 0;
 }
 
-// 4C (AC)
+// 4C (AC) 最优合并问题（第四章题目）
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -655,7 +591,7 @@ int main() {
     return 0;
 }
 
-// 5A (AC)
+// 5A (AC) 全排列问题（第五章题目）
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -725,157 +661,7 @@ int main() {
     return 0;
 }
 
-// 5A 未完待续
-#include <iostream>
-#include <stdio.h>
-using namespace std;
-
-struct ListNode
-{
-    int value;
-    ListNode *next;
-};
-
-class P{
-    friend void search(int n);
-private:
-    void backtrack(int t);
-    int n;
-    ListNode *x;
-};
-
-void P::backtrack(int t)
-{
-    if (t==n-1) {
-        int i = n;
-        ListNode t = x[1];
-        while (i-1) {
-            cout<<t.value<<' ';
-            t = *t.next;
-            i--;
-        }
-        cout<<t.value<<'\n';
-    }
-    else{
-        backtrack(t+1);
-        for (int i=t+2; i<=n; i++) {
-//            swap(x[t], x[i]);
-            x[t].next = &x[i];
-            x[i].next = &x[t+1];
-            x[i-1].next = &x[i+1];
-            backtrack(t+1);
-//            swap(x[t], x[i]);
-            x[t].next = &x[t+1];
-            x[i].next = &x[i+1];
-            x[i-1].next = &x[i];
-        }
-    }
-}
-
-void search(int n)
-{
-    P X;
-    X. n=n;
-    ListNode * N = new ListNode [n+1];
-    for (int i=0; i<n+1; i++) {
-        N[i].value = i;
-    }
-    for (int i=n-1; i>=0; i--) {
-        N[i].next = &N[i+1];
-    }
-    X.x = N;
-    X.backtrack(0);
-    delete [] N;
-}
-
-int main() {
-    int n;
-    while (cin>>n) {
-        if (n==0) {
-            break;
-        }
-        search(n);
-    }
-    return 0;
-}
-
-class P{
-    friend void search(int n);
-private:
-//    bool check(int k);
-    void backtrack(int t,int j);
-    int n, *x;
-};
-
-//bool P::check(int t) {
-//    if (y[t]==1) {
-//        return false;
-//    }
-//    y[t] = 1;
-//    return true;
-//}
-
-void P::backtrack(int t, int j)
-{
-    int m = 0;
-    if (t==n) {
-//        cout<<'j'<<'='<<j<<' ';
-        for (int i=0;i<n-1;i++) {
-            cout<<x[i]<<' ';
-        }
-        cout<<x[n-1]<<'\n';
-    }
-    else{
-        cout<<"swap"<<x[t]<<'&'<<x[j]<<endl;
-        swap(x[t], x[j]);
-        if (t==j) {
-            m = 1;
-            backtrack(t+1, j+1);
-        }else{
-            backtrack(t+1, j);
-        }
-        swap(x[t], x[j]);
-        for (int i=t; i<n; i++) {
-            if (i==j) {
-                continue;
-            }
-            cout<<"swap"<<x[t]<<'&'<<x[i]<<endl;
-            swap(x[t], x[i]);
-            if (t==i) {
-                backtrack(t+1, i+1);
-            }else{
-                backtrack(t+1, i);
-            }
-            swap(x[t], x[i]);
-        }
-    }
-}
-
-void search(int n)
-{
-    P X;
-    X. n=n;
-    int *p = new int [n];
-    for(int i=0;i<n;i++) {
-        p[i] = i+1;
-    }
-    X.x=p;
-    X.backtrack(0, 0);
-    delete [] p;
-}
-
-int main() {
-    int n;
-    while (cin>>n) {
-        if (n==0) {
-            break;
-        }
-        search(n);
-    }
-    return 0;
-}
-
-// 5B (AC)
+// 5B (AC) 全组合(第五章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -926,7 +712,7 @@ int main() {
     return 0;
 }
 
-// 5C (AC)
+// 5C (AC) 整数变换问题（第五章题目）
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -1008,13 +794,12 @@ int main() {
             break;
         }
         int num = num_init(n, m);
-//        cout<<num;
         search(n, m, num);
     }
     return 0;
 }
 
-// 6A (AC)
+// 6A (AC) 列车问题(第六章题目)
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -1108,7 +893,7 @@ int main() {
     return 0;
 }
 
-// 6B (AC)
+// 6B (AC) 青蛙跳石头问题（第六章题目）
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
@@ -1274,7 +1059,7 @@ int main() {
     return 0;
 }
 
-// 6C 王晓东
+// 6C 王晓东 无优先级运算问题（第六章题目）
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -1469,7 +1254,7 @@ int main(){
     return 0;
 }
 
-// 7A (AC)
+// 7A (AC) 矩阵乘法检验(第七章题目)
 #include <iostream>
 #include <stdio.h>
 #include <random>
@@ -1551,7 +1336,7 @@ int main() {
     return 0;
 }
 
-// 7B (AC)
+// 7B (AC) 矩阵乘法检验(第七章题目)
 #include <iostream>
 #include <stdio.h>
 #include <random>
@@ -1614,13 +1399,10 @@ int main(){
 }
 
 
-// 7C (AC)
+// 7C (AC) 完全图最大割问题(第七章题目)
 #include <iostream>
 #include <stdio.h>
-//#include <random>
-
 using namespace std;
-//using std::default_random_engine;
 
 int check(int i,int n,bool *a,int **c){
     int sum = 0;
@@ -1635,7 +1417,6 @@ int check(int i,int n,bool *a,int **c){
 }
 
 void bt (int n, int temp, int &sum, bool *a, int **c, int k){
-//    cout<<"temp="<<temp<<",sum="<<sum<<endl;
     sum = max(sum, temp);
     if (k<n) {
         for (int i=0; i<=1; i++) {
@@ -1643,7 +1424,6 @@ void bt (int n, int temp, int &sum, bool *a, int **c, int k){
                 a[k] = i;
                 int p = check(k,n,a,c);
                 temp += p;
-//                cout<<"p="<<p<<endl;
                 bt(n, temp, sum, a, c, k+1);
                 temp -= p;
             }else{
@@ -1660,7 +1440,6 @@ int main(){
         if (n==0) {
             break;
         }else{
-            //cin
             int **C = new int *[n];
             for(int i=0;i<n;i++) {
                 C[i]=new int [n];
@@ -1674,11 +1453,10 @@ int main(){
             int sum = 0;
             bool *a = new bool [n];
             for (int i=0; i<n; i++) {
-                a[i] = true; //not in set A
+                a[i] = true;
             }
             bt(n, sum, sum, a, C, 0);
             cout<<sum<<endl;
-            //del
             for (int i=0; i<n; i++) {
                 delete [] C[i];
             }
